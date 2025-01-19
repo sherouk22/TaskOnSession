@@ -12,6 +12,8 @@ namespace Assignment07C_OOP04
 
         decimal CalculateDiscount(decimal orderAmount);
 
+   
+
     }
 
     public class OnlineOrderProcessor : IOrderProcessor
@@ -57,15 +59,15 @@ namespace Assignment07C_OOP04
         public decimal OrderAmount { get; set; }
         public IOrderProcessor OrderProcessor { get; set; }
 
-        public IOrderProcessor GetOrderProcessor(string orderType)
+
+
+
+        public void Process()
         {
-            if (orderType.Equals("Online", StringComparison.OrdinalIgnoreCase))
-            {
-                return new OnlineOrderProcessor();
-            }
-
-
-
+            OrderProcessor.ProcessOrder();
+            decimal discount = OrderProcessor.CalculateDiscount(OrderAmount);
+            decimal finalAmount = OrderAmount - discount;
+            Console.WriteLine($"Order {OrderId} processed for {CustomerName}. Final amount after {discount:P0} discount: ${finalAmount:F2}");
         }
 
 
